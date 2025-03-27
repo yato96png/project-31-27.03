@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кликер Игра</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        #score {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Кликер Игра</h1>
+    <button id="clickButton">Нажми меня!</button>
+    <div id="score">Счет: 0</div>
+
+    <script>
+        let score = 0;
+
+        document.getElementById('clickButton').addEventListener('click', async () => {
+            const response = await fetch('/increment', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('score').textContent = `Счет: ${data.click_count}`;
+        });
+    </script>
+</body>
+</html>
